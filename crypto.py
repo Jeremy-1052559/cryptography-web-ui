@@ -2,7 +2,7 @@ import base64
 import os
 import pathlib
 
-from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives import hashes, padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
@@ -44,9 +44,15 @@ def encrypt(message: str, password: str):
     key = get_secret_key(password, salt)  # Generate key from password and random salt
     cipher = get_cipher(key, iv)
     encryptor = cipher.encryptor()  # Obtain new cipher context
+    padder = padding.PKCS7(
+        128
+    ).padder()  # Obtain new padder to pad content before encryption
+    padded = (
+        padder.update(message) + padder.finalize()
+    )  # Load message into padder and close padder
     cipher_text = (
-        encryptor.update(message) + encryptor.finalize()
-    )  # Load message into cipher context and close context
+        encryptor.update(padded) + encryptor.finalize()
+    )  # Load padded message into cipher context and close context
     return (
         base64.b64encode(salt + iv + cipher_text).decode()
     )  # Encode salt, vector, and encrypted text to base64 and decode bytes to utf-8
