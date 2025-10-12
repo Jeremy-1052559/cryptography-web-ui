@@ -8,7 +8,7 @@ const ENCRYPTBUTTON = document.getElementById('encrypt-button'),
 ENCRYPTBUTTON.addEventListener('click', () => {
     post({'text': ENCRYPTBOX.value},
          '/encrypt',
-         (json) => { DECRYPTBOX.value = json['encrypted']; DECRYPTCOPYBUTTON.classList.toggle('d-none'); },
+         (json) => { DECRYPTBOX.value = json['encrypted']; DECRYPTCOPYBUTTON.classList.remove('d-none'); },
          (error) => { console.log(error); }
     );
 });
@@ -16,7 +16,7 @@ ENCRYPTBUTTON.addEventListener('click', () => {
 DECRYPTBUTTON.addEventListener('click', () => {
     post({'text': DECRYPTBOX.value},
          '/decrypt',
-         (json) => { ENCRYPTBOX.value = json['decrypted']; ENCRYPTCOPYBUTTON.classList.toggle('d-none'); },
+         (json) => { ENCRYPTBOX.value = json['decrypted']; ENCRYPTCOPYBUTTON.classList.remove('d-none'); },
          (error) => { console.log(error); }
     );
 });
