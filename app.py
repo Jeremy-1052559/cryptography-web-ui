@@ -15,8 +15,6 @@ if not env.get("PASSWORD") or len(env.get("PASSWORD")) < 16:
         "This app requires a secure password of at least 16 characters to be provided to work"
     )
 
-print(decrypt(encrypt("Hello World!", env.get("PASSWORD")), env.get("PASSWORD")))
-
 
 @app.get("/", include_in_schema=False)
 async def home(request: Request):
