@@ -43,7 +43,7 @@ def encrypt(message: str, password: str):
     iv = os.urandom(16)  # Generate unique initialization vector
     key = get_secret_key(password, salt)  # Generate key from password and random salt
     cipher = get_cipher(key, iv)
-    encryptor = cipher.encryptor()  # Obtain new cipher context
+    encryptor = cipher.encryptor()  # Obtain new cipher context for encryption
     padder = padding.PKCS7(
         128
     ).padder()  # Obtain new padder to pad content before encryption
@@ -59,4 +59,22 @@ def encrypt(message: str, password: str):
 
 
 def decrypt(message: str, password: str):
-    pass
+    encrypted = base64.b64decode(message)
+    salt = encrypted[:16]  # First 16 chars are the salt
+    iv = encrypted[16:32]  # Second 16 chars is the initialization vector
+    encrypted = encrypted[32:]  # Rest is the actual encrypted message
+    key = get_secret_key(
+        password, salt
+    )  # If not tampered with, salt should generate the same key
+    cipher = get_cipher(key, iv)
+    decryptor = cipher.decryptor()  # Obtain new cipher context for decryption
+    unpadder = padding.PKCS7(
+        128
+    ).unpadder()  # Obtain new unpadder to remove padding from content after decryption
+    padded = (
+        decryptor.update(encrypted) + decryptor.finalize()
+    )  # Decrypt message into padded message
+    original_text = (
+        unpadder.update(padded) + unpadder.finalize()
+    )  # Remove padding from message to retrieve original content
+    return original_text.decode()  # Decode retrieved content bytes to utf-8

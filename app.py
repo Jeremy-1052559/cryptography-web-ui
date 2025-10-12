@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from crypto import encrypt, get_env
+from crypto import decrypt, encrypt, get_env
 
 app = FastAPI()
 templates = Jinja2Templates(directory="web/templates")
@@ -15,7 +15,7 @@ if not env.get("PASSWORD") or len(env.get("PASSWORD")) < 16:
         "This app requires a secure password of at least 16 characters to be provided to work"
     )
 
-print(encrypt("Hello World!", env.get("PASSWORD")))
+print(decrypt(encrypt("Hello World!", env.get("PASSWORD")), env.get("PASSWORD")))
 
 
 @app.get("/", include_in_schema=False)
