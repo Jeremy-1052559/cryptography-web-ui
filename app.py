@@ -25,9 +25,15 @@ async def home(request: Request):
 
 @app.post("/encrypt", include_in_schema=False)
 async def web_encrypt(request: Request):
-    pass
+    json = await request.json()
+    string = json["text"]
+    encrypted = encrypt(string.encode(), env.get("PASSWORD"))
+    return {"encrypted": encrypted}
 
 
 @app.post("/decrypt", include_in_schema=False)
 async def web_decrypt(request: Request):
-    pass
+    json = await request.json()
+    string = json["text"]
+    decrypted = decrypt(string.encode(), env.get("PASSWORD"))
+    return {"decrypted": decrypted}
