@@ -1,7 +1,9 @@
 const ENCRYPTBUTTON = document.getElementById('encrypt-button'),
       DECRYPTBUTTON = document.getElementById('decrypt-button'),
       ENCRYPTBOX = document.getElementById('encrypt-box'),
-      DECRYPTBOX = document.getElementById('decrypt-box');
+      DECRYPTBOX = document.getElementById('decrypt-box'),
+      ENCRYPTCOPYBUTTON = document.getElementById('clipboard-button-encrypt'),
+      DECRYPTCOPYBUTTON = document.getElementById('clipboard-button-decrypt');
 
 ENCRYPTBUTTON.addEventListener('click', () => {
     post({'text': ENCRYPTBOX.value},
@@ -18,6 +20,9 @@ DECRYPTBUTTON.addEventListener('click', () => {
          (error) => { console.log(error); }
     );
 });
+
+ENCRYPTCOPYBUTTON.addEventListener('click', () => { navigator.clipboard.writeText(ENCRYPTBOX.value); });
+DECRYPTCOPYBUTTON.addEventListener('click', () => { navigator.clipboard.writeText(DECRYPTBOX.value); });
 
 function post(data, endpoint, onload, onerror)
 {

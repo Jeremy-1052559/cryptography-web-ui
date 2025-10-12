@@ -12,14 +12,20 @@
             <h2>Encrypt:</h2>
             <div class="d-flex flex-row">
                 <textarea id="encrypt-box" class="p-2 me-2" cols="75" rows="5"></textarea>
-                <button class="btn submit-button p-2" id="encrypt-button">Encrypt!</button>
+                <div class="d-flex flex-column align-self-center">
+                    <button class="btn submit-button p-2" id="encrypt-button">Encrypt!</button>
+                    <button class="btn clipboard-button p-2 mt-2 d-none" id="clipboard-button-encrypt">Copy!</button>
+                </div>
             </div>
         </section>
         <section class="mt-2">
             <h2>Decrypt:</h2>
             <div class="d-flex flex-row">
                 <textarea id="decrypt-box" class="p-2 me-2" cols="75" rows="5"></textarea>
-                <button class="btn submit-button p-2" id="decrypt-button">Decrypt!</button>
+                <div class="d-flex flex-column align-self-center">
+                    <button class="btn submit-button p-2" id="decrypt-button">Decrypt!</button>
+                    <button class="btn clipboard-button p-2 mt-2 d-none" id="clipboard-button-decrypt">Copy!</button>
+                </div>
             </div>
         </section>
     </main>
