@@ -1,6 +1,9 @@
+import base64
+import os
 import pathlib
 
 from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 
@@ -29,8 +32,24 @@ def get_secret_key(password: str, salt: bytes):
     return kdf.derive(password.encode())
 
 
+def get_cipher(secret_key: bytes, iv: bytes):
+    algo = algorithms.AES256(secret_key)  # Select algorithm and attach secret key
+    mode = modes.CBC(iv)  # Select mode and attach initialization vector
+    return Cipher(algo, mode)  # Obtain cipher from algorithm and mode
+
+
 def encrypt(message: str, password: str):
-    pass
+    salt = os.urandom(16)  # Generate unique salt
+    iv = os.urandom(16)  # Generate unique initialization vector
+    key = get_secret_key(password, salt)  # Generate key from password and random salt
+    cipher = get_cipher(key, iv)
+    encryptor = cipher.encryptor()  # Obtain new cipher context
+    cipher_text = (
+        encryptor.update(message) + encryptor.finalize()
+    )  # Load message into cipher context and close context
+    return (
+        base64.b64encode(salt + iv + cipher_text).decode()
+    )  # Encode salt, vector, and encrypted text to base64 and decode bytes to utf-8
 
 
 def decrypt(message: str, password: str):
