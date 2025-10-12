@@ -53,3 +53,12 @@ button {
 .submit-button:hover {
     background-color: var(--color-success-hover);
 }
+
+.clipboard-button {
+    background-color: var(--color-accent);
+    transition: background-color .5s ease;
+}
+
+.clipboard-button:hover {
+    background-color: var(--color-accent-hover);
+}
