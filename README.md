@@ -1,6 +1,8 @@
 # Cryptography Web UI
 A web-based user interface for encrypting and decrypting text to and from AES-256
 
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Jeremy-1052559/cryptography-web-ui)
+
 ## Instalation
 1. Install python 3.10+
 2. Download the code and extract into a folder on your desktop
