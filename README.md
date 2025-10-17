@@ -29,15 +29,15 @@ http://0.0.0.0:8000
 
 ## How to use
 1. Go to the url above
-2. Enter the text you want to encrypt in the box as shown below 
+2. Enter the text you want to encrypt in the box as shown below   
 ![Input Box](docs/images/encrypt_box.png)
-3. Click the green encrypt button
+3. Click the green encrypt button  
 ![Encrypt Button](docs/images/encrypt_button.png)
-4. The encrypted text should now appear in the box as shown below
+4. The encrypted text should now appear in the box as shown below  
 ![Output Box](docs/images/decrypt_box.png)
-5. (Optional) Click the copy button to instantly copy the text to your clipboard
+5. (Optional) Click the copy button to instantly copy the text to your clipboard  
 ![Copy Button](docs/images/copy_button.png)
-6. (Optional) Clear the encrypt box and click the green decrypt button to decrypt your text
+6. (Optional) Clear the encrypt box and click the green decrypt button to decrypt your text  
 ![Decrypt Button](docs/images/decrypt_button.png)
 
 ## Encryption
